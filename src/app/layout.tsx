@@ -2,12 +2,35 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "@/context/theme-provider";
-import { ClerkProvider } from '@clerk/nextjs'
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/nextjs";
+import { dark } from '@clerk/themes';
 
 export const metadata: Metadata = {
   title: "Pair Pro",
   description: "Stuck on something, find people to pair program with!",
 };
+
+
+function Header() {
+  return (
+    <>
+      <SignedIn>
+        {/* Mount the UserButton component */}
+        <UserButton />
+      </SignedIn>
+      <SignedOut>
+        {/* Signed out users get sign in button */}
+        <SignInButton />
+      </SignedOut>
+    </>
+  );
+}
 
 export default async function RootLayout({
   children,
@@ -15,7 +38,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        baseTheme: dark
+      }}
+    >
       <html lang="en" suppressHydrationWarning>
         <body className={GeistSans.className}>
           <ThemeProvider
@@ -24,6 +51,7 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Header />
             {children}
           </ThemeProvider>
         </body>
