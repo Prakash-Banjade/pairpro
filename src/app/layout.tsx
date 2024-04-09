@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Stuck on something, find people to pair program with!",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
