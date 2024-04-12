@@ -9,7 +9,7 @@ export function TracingBeamWrapper({ children }: {
     children: React.ReactNode
 }) {
     return (
-        <TracingBeam className="px-6 bg-black">
+        <TracingBeam className="px-6">
             <div className="w-full min-h-full mx-auto antialiased pt-4 relative">
                 {children}
             </div>
