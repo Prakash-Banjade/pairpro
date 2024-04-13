@@ -5,7 +5,6 @@ import { TracingBeamWrapper } from "@/components/utils/tracing-bean";
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <Header />
       <TracingBeamWrapper>
         <SignUpRecommendation />
       </TracingBeamWrapper>

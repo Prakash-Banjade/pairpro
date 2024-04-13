@@ -20,6 +20,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import clsx from 'clsx'
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { createRoom } from '@/app/create-room/actions'
+import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast'
 
 type Props = {}
 
@@ -53,6 +55,8 @@ const SelectRadioGroup = (field: CreateRoomFormField, onChange: () => void, valu
 }
 
 export default function CreateRoomForm({ }: Props) {
+    const router = useRouter();
+
     const form = useForm<CreateRoomFormSchema>({
         resolver: zodResolver(createRoomFormSchema),
         defaultValues: {
@@ -66,8 +70,16 @@ export default function CreateRoomForm({ }: Props) {
 
     async function onSubmit(values: CreateRoomFormSchema) {
         // console.log(values)
-        await createRoom(values)
-        console.log(values)
+        const result = createRoom(values)
+
+        toast.promise(result, {
+            loading: 'Creating room...',
+            success: 'Room created successfully',
+            error: 'Failed to create room',
+        })
+
+        result.then(() => router.push('/home'))
+
     }
 
     return (

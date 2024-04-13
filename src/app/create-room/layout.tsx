@@ -8,7 +8,6 @@ type Props = {
 export default async function CreateRoomLayout({ children }: Props) {
     return (
         <div>
-            <Header />
             {children}
         </div>
     )
