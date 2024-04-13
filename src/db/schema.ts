@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import { boolean, pgEnum, pgTable, text, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
 export const oAuthProviderEnum = pgEnum('oAuth', ['google', 'github', 'linkedin'])
+export const visibility = pgEnum('visibility', ['public', 'private'])
 
 export const users = pgTable('users', {
     id: uuid('id').primaryKey().defaultRandom().notNull(),
@@ -33,7 +34,7 @@ export const room = pgTable('room', {
     creator: text('userId').notNull().references(() => users.id, { onDelete: 'cascade' }),
     roomName: text('roomName').notNull(),
     description: text('description'),
-    isPrivate: boolean('isPrivate').notNull().default(false),
+    visibility: visibility('visibility').notNull().default('public'),
     language: text('language').notNull(),
     githubRepo: text('githubRepo'),
     created_at: timestamp('created_at').notNull().defaultNow(),
@@ -45,6 +46,8 @@ export const roomRelations = relations(room, ({ many }) => ({
     users: many(users),
     allowedUsers: many(users),
 }));
+
+export type NewRoom = typeof room.$inferInsert
 
 // You do not need to define a column on the room table to reference users for a one-to-many relationship in Drizzle ORM.
 // The "many" side (in this case, users) contains a foreign key column that references the primary key of the "one" side (room).
