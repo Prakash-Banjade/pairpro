@@ -17,8 +17,8 @@ export function SignInbBtn() {
 export default function Header({ }: Props) {
 
     return (
-        <header className='w-full px-5 border-b'>
-            <div className='max-w-7xl px-5 flex items-center justify-between mx-auto py-5'>
+        <header className='w-full border-b'>
+            <div className='container flex items-center justify-between py-5'>
                 <h1 className='text-3xl font-bold'>Pair Pro</h1>
                 <section className='flex gap-5 items-center'>
                     <ThemeToggleBtn />
