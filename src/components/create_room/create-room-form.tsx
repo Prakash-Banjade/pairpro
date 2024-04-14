@@ -22,10 +22,25 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { createRoom } from '@/app/create-room/actions'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { MdOutlinePublic } from "react-icons/md";
+import { RiGitRepositoryPrivateLine } from "react-icons/ri";
 
 type Props = {}
 
 const SelectRadioGroup = (field: CreateRoomFormField, onChange: () => void, value: string | undefined) => {
+    const options = [
+        {
+            value: 'public',
+            description: 'Anyone on the internet can join the room',
+            icon: MdOutlinePublic,
+        },
+        {
+            value: 'private',
+            description: 'You choose who can join the rooom',
+            icon: RiGitRepositoryPrivateLine
+        },
+    ]
+
     return <FormItem className="space-y-3">
         <FormControl>
             <RadioGroup
@@ -34,15 +49,19 @@ const SelectRadioGroup = (field: CreateRoomFormField, onChange: () => void, valu
                 className="flex flex-col space-y-1"
             >
                 {
-                    field?.options?.map(option => typeof option !== 'string' && (
+                    options?.map(option => typeof option !== 'string' && (
                         <FormItem className="flex items-center space-x-3 space-y-1.5" key={option.value}>
                             <FormControl>
                                 <RadioGroupItem value={option.value} />
                             </FormControl>
-                            <FormLabel className="font-normal">
-                                <div className='flex flex-col gap-1'>
-                                    <p className='capitalize'>{option.value}</p>
-                                    <p className='text-xs text-muted-foreground'>{option.description}</p>
+                            <FormLabel className="font-normal hover:cursor-pointer">
+                                <div className='flex gap-2 items-start'>
+                                    <option.icon size={24} />
+
+                                    <div className='flex flex-col gap-1'>
+                                        <p className='capitalize'>{option.value}</p>
+                                        <p className='text-xs text-muted-foreground'>{option.description}</p>
+                                    </div>
                                 </div>
                             </FormLabel>
                         </FormItem>

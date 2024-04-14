@@ -90,15 +90,5 @@ export const createRoomFormFields: CreateRoomFormField[] = [
         name: 'visibility',
         label: 'Select Visibility',
         type: 'checkbox',
-        options: [
-            {
-                value: 'public',
-                description: 'Anyone on the internet can join the room'
-            },
-            {
-                value: 'private',
-                description: 'You choose who can join the rooom'
-            },
-        ]
     },
 ]
