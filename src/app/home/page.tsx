@@ -21,7 +21,7 @@ export default async function HomePage({ }: Props) {
     return (
         <div>
             <section className='flex justify-between items-center'>
-                <H1 className='capitalize mb-0'>find dev room here</H1>
+                <H1 className='capitalize mb-0'>find dev rooms here</H1>
                 <Button asChild>
                     <Link href="/create-room">Create room</Link>
                 </Button>
