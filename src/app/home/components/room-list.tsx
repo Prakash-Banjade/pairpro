@@ -37,7 +37,7 @@ function RoomCard({ room }: { room: RoomWithCreator }) {
             <CardFooter className='flex justify-between flex-wrap w-full gap-4 items-baseline'>
                 <p className='text-muted-foreground text-sm capitalize'>{createdDate}</p>
                 <Button asChild>
-                    <Link href={`/room/${room.id}`}>
+                    <Link href={`/rooms/${room.id}`}>
                         Join room
                     </Link>
                 </Button>
