@@ -12,9 +12,9 @@ import { formatDistanceToNow } from 'date-fns'
 import Link from 'next/link'
 import { FaGithub } from "react-icons/fa";
 import { Button } from '@/components/ui/button'
-import { useRouter } from 'next/router'
+import { RoomWithCreator } from '../../../../types'
 
-type RoomWithCreator = Room & { creator: Partial<User> }
+
 
 type Props = {
     rooms: RoomWithCreator[]

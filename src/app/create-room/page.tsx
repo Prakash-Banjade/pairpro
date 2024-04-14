@@ -1,4 +1,4 @@
-import CreateRoomForm from '@/components/create_room/create-room-form'
+import CreateRoomForm from '@/app/create-room/components/create-room-form'
 import { H1 } from '@/components/ui/typography'
 import React from 'react'
 

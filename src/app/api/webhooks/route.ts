@@ -6,7 +6,7 @@ import db from '@/db'
 import { users } from '@/db/schema'
 import { NextRequest, NextResponse } from 'next/server'
 import { eq } from 'drizzle-orm'
-import getUser from '@/lib/getUser'
+import { getUser } from '@/lib/user-data-access'
 
 export async function POST(req: NextRequest) {
 

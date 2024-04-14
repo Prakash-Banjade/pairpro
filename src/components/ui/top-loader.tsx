@@ -7,7 +7,6 @@ type Props = {}
 
 export default function TopLoadingBar({ }: Props) {
     const { themes } = useTheme();
-    console.log('theme: ', themes)
     return (
         <NextTopLoader color="#1E90FF" />
     )
