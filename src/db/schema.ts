@@ -31,7 +31,7 @@ export const room = pgTable('room', {
     roomName: text('roomName').notNull(),
     description: text('description'),
     visibility: visibility('visibility').notNull().default('public'),
-    language: text('language').notNull(),
+    tags: text('tags').notNull(),
     githubRepo: text('githubRepo'),
     created_at: timestamp('created_at').notNull().defaultNow(),
     updated_at: timestamp('updated_at', { mode: 'date', precision: 3 }).$onUpdate(() => new Date()),

@@ -1,28 +1,6 @@
 import { Value } from "@radix-ui/react-select";
 import { z } from "zod";
 
-export const primaryLanguageOptions = z.enum([
-    'JavaScript',
-    'Python',
-    'C++',
-    'Java',
-    'TypeScript',
-    'C#',
-    'PHP',
-    'Ruby',
-    'Go',
-    'Rust',
-    'Kotlin',
-    'Swift',
-    'Scala',
-    'Dart',
-    'C',
-    'R',
-    'Elixir',
-    'Erlang',
-], {required_error: 'Primary language should be mentioned'})
-
-
 export const createRoomFormSchema = z.object({
     roomName: z
         .string()
@@ -30,7 +8,7 @@ export const createRoomFormSchema = z.object({
     description: z
         .string()
         .max(250, { message: "Too long, must be less than 250 characters" }),
-    language: primaryLanguageOptions,
+    tags: z.string({ required_error: 'Mention atleast one tag' }).min(1, { message: "Mention atleast one tag" }),
     githubRepo: z.string().refine(
         (val) => {
             if (!val.length || val?.startsWith('https://github.com/')) {
@@ -71,14 +49,10 @@ export const createRoomFormFields: CreateRoomFormField[] = [
         placeholder: 'Enter description',
     },
     {
-        name: 'language',
-        label: 'Primary programming language',
-        type: 'select',
-        placeholder: 'Select language',
-        options: primaryLanguageOptions._def.values.map((value) => ({
-            value: value as typeof value,
-            label: value
-        }))
+        name: 'tags',
+        label: 'Tags',
+        type: 'text',
+        placeholder: 'Go, Rust, Python',
     },
     {
         name: 'githubRepo',
