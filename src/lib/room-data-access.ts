@@ -1,5 +1,5 @@
 import db from "@/db"
-import getCurrentUser from "./getCurrentUser"
+import { getCurrentUser } from "./user-data-access"
 import { redirect } from "next/navigation"
 
 export default async function getRooms() {

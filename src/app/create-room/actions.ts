@@ -3,7 +3,7 @@
 import { zodValidate } from "@/components/utils/zodValidate";
 import db from "@/db";
 import { NewRoom, room } from "@/db/schema";
-import getCurrentUser from "@/lib/getCurrentUser";
+import { getCurrentUser } from "@/lib/user-data-access";
 import { CreateRoomFormSchema, createRoomFormSchema } from "@/models/create-room.model";
 import { revalidatePath } from "next/cache";
 

@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button'
-import { H1, H2 } from '@/components/ui/typography'
-import getRooms from '@/lib/getRooms'
+import { H1 } from '@/components/ui/typography'
+import getRooms from '@/lib/room-data-access'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
 import RoomList from './components/room-list'
