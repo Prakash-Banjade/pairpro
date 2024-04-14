@@ -19,7 +19,7 @@ export default function Header({ }: Props) {
 
     return (
         <header className='w-full border-b bg-backgroundSecondary'>
-            <div className='container flex items-center justify-between py-5'>
+            <div className='container flex items-center justify-between py-3'>
                 <Link href='/' className='flex gap-3 items-center'>
                     <Image
                         src="/icon.png"

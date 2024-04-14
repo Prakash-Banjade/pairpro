@@ -14,36 +14,38 @@ import { FaGithub } from "react-icons/fa";
 import { Button } from '@/components/ui/button'
 import { RoomWithCreator } from '../../../../types'
 import TagsList from '@/components/utils/tags-list'
+import { cn } from '@/lib/utils'
+import clsx from 'clsx'
 
 
 
 type Props = {
-    rooms: RoomWithCreator[]
+    rooms: RoomWithCreator[],
 }
 
-function RoomCard({ room }: { room: RoomWithCreator }) {
+export function RoomCard({ room, className = '', join = true }: { room: RoomWithCreator, className?: string, join?: boolean }) {
 
     const createdDate = formatDistanceToNow(new Date(room.created_at), { addSuffix: true })
 
     return (
-        <Card className=''>
-            <CardHeader>
+        <Card className={cn('', className)}>
+            <CardHeader className={clsx(!join && 'p-0')}>
                 <CardTitle className='xl:text-2xl text-lg'>{room.roomName}</CardTitle>
                 <CardDescription className='line-clamp-2'>{room.description}</CardDescription>
             </CardHeader>
-            <CardContent className='space-y-3'>
+            <CardContent className={clsx(!join && 'p-0', 'space-y-3')}>
                 <p>{room.creator.first_name + ' ' + room.creator.last_name}</p>
                 {room.githubRepo && <Link href={room.githubRepo} target='_blank' rel='noopener noreferrer' className='flex gap-2 text-sm hover:underline whitespace-pre-wrap break-words'><FaGithub size={24} /> {room.githubRepo}</Link>}
                 <TagsList tags={room.tags} />
             </CardContent>
-            <CardFooter className='flex justify-between flex-wrap w-full gap-4 items-baseline'>
+            {join && <CardFooter className='flex justify-between flex-wrap w-full gap-4 items-baseline'>
                 <p className='text-muted-foreground text-sm capitalize'>{createdDate}</p>
                 <Button asChild>
                     <Link href={`/rooms/${room.id}`}>
                         Join room
                     </Link>
                 </Button>
-            </CardFooter>
+            </CardFooter>}
         </Card>
 
     )

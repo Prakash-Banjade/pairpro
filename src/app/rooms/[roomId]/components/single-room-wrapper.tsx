@@ -6,12 +6,16 @@ import { H3 } from '../../../../components/ui/typography'
 import { Button } from '../../../../components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
+import { VideoPlayer } from './video-player'
+import { User } from '@/db/schema'
+import { RoomCard } from '@/app/home/components/room-list'
 
 type Props = {
     room: RoomWithCreator | undefined,
+    currentUser: User | undefined,
 }
 
-export default function SingleRoomWrapper({ room }: Props) {
+export default function SingleRoomWrapper({ room, currentUser }: Props) {
 
 
     if (!room) {
@@ -35,10 +39,13 @@ export default function SingleRoomWrapper({ room }: Props) {
     }
 
     return (
-        <div>
-            {
-                room.roomName
-            }
+        <div className='grid lg:grid-cols-4 grid-cols-1 gap-5'>
+            <section className='col-span-3'>
+                <VideoPlayer room={room} user={currentUser} />
+            </section>
+            <section>
+                <RoomCard room={room} className='border-none' join={false} />
+            </section>
         </div>
     )
 }
