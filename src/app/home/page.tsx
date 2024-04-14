@@ -13,7 +13,13 @@ const Rooms = async () => {
     return rooms.length > 0 ? (
         <RoomList rooms={rooms} />
     ) : (
-        <p className='text-muted-foreground text-center pt-10'>No rooms found</p>
+        <div className='flex flex-col gap-1 mt-20'>
+            <p className=' text-center text-lg'>No room found!</p>
+            <p className='text-muted-foreground text-center'>
+                Looks like everyone is enjoying on their own
+            </p>
+            <p className='text-muted-foreground text-center'>You can create your own room</p>
+        </div>
     )
 }
 
