@@ -40,6 +40,12 @@ export default function SearchInput() {
         })
     }, [params])
 
+    useEffect(() => {
+        if (form.getValues().query.length === 0) {
+            router.push('/home')
+        }
+    }, [form.watch("query")])
+
     function onSubmit(values: z.infer<typeof formSchema>) {
         values.query.length? router.push(`?q=${values.query}`) : router.push('/home')
     }
@@ -53,7 +59,7 @@ export default function SearchInput() {
                     render={({ field }) => (
                         <FormItem className="flex-1 max-w-2xl">
                             <FormControl>
-                                <Input placeholder="Search rooms with tags (go, rust, python)" {...field} />
+                                <Input placeholder="Search rooms with tags (go, rust, python)" type="search" {...field} />
                             </FormControl>
                             <FormMessage className="sr-only" />
                         </FormItem>

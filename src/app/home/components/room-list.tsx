@@ -21,9 +21,18 @@ import clsx from 'clsx'
 
 type Props = {
     rooms: RoomWithCreator[],
+    self: boolean,
 }
 
-export function RoomCard({ room, className = '', join = true, header = true }: { room: RoomWithCreator, className?: string, join?: boolean, header?: boolean }) {
+interface RoomCardProps {
+    room: RoomWithCreator
+    className?: string
+    join?: boolean
+    header?: boolean
+    self: boolean
+}
+
+export function RoomCard({ room, className = '', join = true, header = true, self = true }: RoomCardProps) {
 
     const createdDate = formatDistanceToNow(new Date(room.created_at), { addSuffix: true })
 
@@ -34,7 +43,7 @@ export function RoomCard({ room, className = '', join = true, header = true }: {
                 <CardDescription className='line-clamp-2'>{room.description}</CardDescription>
             </CardHeader>}
             <CardContent className={clsx(!join && 'p-0', 'space-y-3')}>
-                <p>{room.creator.first_name + ' ' + room.creator.last_name}</p>
+                {self && <p>{room.creator.first_name + ' ' + room.creator.last_name}</p>}
                 {room.githubRepo && <Link href={room.githubRepo} target='_blank' rel='noopener noreferrer' className='flex gap-2 text-sm hover:underline whitespace-pre-wrap break-words'><FaGithub size={24} /> {room.githubRepo}</Link>}
                 <TagsList tags={room.tags} />
             </CardContent>
@@ -51,11 +60,11 @@ export function RoomCard({ room, className = '', join = true, header = true }: {
     )
 }
 
-export default function RoomList({ rooms }: Props) {
+export default function RoomList({ rooms, self }: Props) {
     return (
         <div className='grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mt-10'>
             {rooms.map((room) => (
-                <RoomCard room={room} key={room.id} />
+                <RoomCard room={room} key={room.id} self={!self} />
             ))}
         </div>
     )

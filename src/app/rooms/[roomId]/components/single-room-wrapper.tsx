@@ -102,7 +102,7 @@ function RoomAsideContent({ room }: { room: RoomWithCreator }) {
                 <H2 className='tracking-tight mb-0'>{room.roomName}</H2>
                 <p className='line-clamp-2 text-xs mb-3'>{room.description}</p>
             </section>
-            <RoomCard room={room} className='border-none mb-10' join={false} header={false} />
+            <RoomCard room={room} className='border-none mb-10' join={false} header={false} self={false} />
             {/* <ParticipantsList /> */}
             <CallParticipantsList onClose={() => { }} />
         </div>
