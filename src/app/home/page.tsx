@@ -63,8 +63,13 @@ export default async function HomePage(props: Omit<Props, 'self'>) {
             <TabsContent value="my rooms">
                 <div>
                     <section className='flex justify-between items-center mb-8'>
-
                         <H1 className='capitalize mb-0'>My rooms</H1>
+                        <Button asChild className='flex gap-1'>
+                            <Link href="/create-room">
+                                <PlusIcon className='h-5 w-5' />
+                                Create room
+                            </Link>
+                        </Button>
                     </section>
                     <SearchInput />
                     {q > 0 && <p className='mt-5'><strong>Showing results for:</strong> {props.searchParams.q}</p>}
