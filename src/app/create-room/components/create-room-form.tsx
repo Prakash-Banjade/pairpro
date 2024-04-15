@@ -82,7 +82,7 @@ export default function CreateRoomForm({ }: Props) {
             description: '',
             githubRepo: '',
             visibility: 'public',
-            language: undefined,
+            tags: '',
             roomName: '',
         },
     })

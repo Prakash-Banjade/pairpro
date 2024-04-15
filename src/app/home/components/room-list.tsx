@@ -23,16 +23,16 @@ type Props = {
     rooms: RoomWithCreator[],
 }
 
-export function RoomCard({ room, className = '', join = true }: { room: RoomWithCreator, className?: string, join?: boolean }) {
+export function RoomCard({ room, className = '', join = true, header = true }: { room: RoomWithCreator, className?: string, join?: boolean, header?: boolean }) {
 
     const createdDate = formatDistanceToNow(new Date(room.created_at), { addSuffix: true })
 
     return (
         <Card className={cn('', className)}>
-            <CardHeader className={clsx(!join && 'p-0')}>
+            {header && <CardHeader className={clsx(!join && 'p-0')}>
                 <CardTitle className='xl:text-2xl text-lg'>{room.roomName}</CardTitle>
                 <CardDescription className='line-clamp-2'>{room.description}</CardDescription>
-            </CardHeader>
+            </CardHeader>}
             <CardContent className={clsx(!join && 'p-0', 'space-y-3')}>
                 <p>{room.creator.first_name + ' ' + room.creator.last_name}</p>
                 {room.githubRepo && <Link href={room.githubRepo} target='_blank' rel='noopener noreferrer' className='flex gap-2 text-sm hover:underline whitespace-pre-wrap break-words'><FaGithub size={24} /> {room.githubRepo}</Link>}

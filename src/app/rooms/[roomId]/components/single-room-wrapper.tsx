@@ -1,22 +1,58 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { RoomWithCreator } from '../../../../../types'
-import { H3 } from '../../../../components/ui/typography'
+import { H2, H3 } from '../../../../components/ui/typography'
 import { Button } from '../../../../components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 import { VideoPlayer } from './video-player'
 import { User } from '@/db/schema'
 import { RoomCard } from '@/app/home/components/room-list'
+import { CallParticipantsList, StreamCall, StreamCallProvider, StreamTheme, StreamVideoClient, StreamVideoProvider } from '@stream-io/video-react-sdk'
+import generateStreamToken from './action'
+import { Call } from '@stream-io/video-react-sdk';
+import '@stream-io/video-react-sdk/dist/css/styles.css';
+import useBeforeUnload from '@/hooks/useBeforeUnload'
 
 type Props = {
     room: RoomWithCreator | undefined,
-    currentUser: User | undefined,
+    currentUser: User,
 }
 
 export default function SingleRoomWrapper({ room, currentUser }: Props) {
+    const [call, setCall] = useState<Call | undefined>()
+    const [client, setClient] = useState<StreamVideoClient | undefined>()
 
+
+    useEffect(() => {
+        if (!room) return;
+
+        const user_name = currentUser.first_name + ' ' + currentUser.last_name
+
+        const client = new StreamVideoClient({
+            apiKey: 'f2ns3n38gg4c',
+            user: {
+                id: currentUser.id,
+                name: user_name,
+            },
+            tokenProvider: () => generateStreamToken(),
+        });
+        setClient(client)
+
+        const call = client.call('default', room.id);
+        call.join({ create: true });
+        setCall(call)
+
+        return () => {
+            call.leave().then(() => {
+                client.disconnectUser()
+            }).catch(console.error)
+        }
+    }, [room, currentUser])
+
+    // TODO:
+    // useBeforeUnload(true);
 
     if (!room) {
         return (
@@ -38,14 +74,37 @@ export default function SingleRoomWrapper({ room, currentUser }: Props) {
         )
     }
 
+    if (!client) return null;
+
+
     return (
-        <div className='grid lg:grid-cols-4 grid-cols-1 gap-5'>
-            <section className='col-span-3'>
-                <VideoPlayer room={room} user={currentUser} />
+        <StreamVideoProvider client={client}>
+            <StreamTheme>
+                <StreamCallProvider call={call}>
+                    <div className='grid lg:grid-cols-4 grid-cols-1 gap-5'>
+                        <section className='lg:col-span-3'>
+                            <VideoPlayer room={room} user={currentUser} />
+                        </section>
+                        <section>
+                            <RoomAsideContent room={room} />
+                        </section>
+                    </div>
+                </StreamCallProvider>
+            </StreamTheme>
+        </StreamVideoProvider>
+    )
+}
+
+function RoomAsideContent({ room }: { room: RoomWithCreator }) {
+    return (
+        <div className='space-y-5'>
+            <section className=''>
+                <H2 className='tracking-tight mb-0'>{room.roomName}</H2>
+                <p className='line-clamp-2 text-xs mb-3'>{room.description}</p>
             </section>
-            <section>
-                <RoomCard room={room} className='border-none' join={false} />
-            </section>
+            <RoomCard room={room} className='border-none mb-10' join={false} header={false} />
+            {/* <ParticipantsList /> */}
+            <CallParticipantsList onClose={() => { }} />
         </div>
     )
 }

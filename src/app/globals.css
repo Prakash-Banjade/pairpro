@@ -83,3 +83,7 @@ html,
 body {
   height: 100%;
 }
+
+.str-video__paginated-grid-layout__group{
+  padding: 0 !important;
+}
