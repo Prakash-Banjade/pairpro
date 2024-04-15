@@ -16,7 +16,7 @@ export default function TagsList({ tags }: Props) {
         <div className='flex flex-wrap gap-2'>
             {
                 tagsArray.map((tag, index) => <button
-                    className={badgeVariants()}
+                    className={badgeVariants({ variant: 'secondary' })}
                     aria-roledescription='tag'
                     onClick={() => router.push(`?q=${tag}`)}
                     key={index}
