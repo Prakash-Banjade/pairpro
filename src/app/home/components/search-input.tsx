@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { useRouter, useSearchParams } from "next/navigation"
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons"
+import { useEffect } from "react"
 
 const formSchema = z.object({
     query: z.string(),
@@ -32,6 +33,12 @@ export default function SearchInput() {
             query: params.get("q") || "",
         },
     })
+
+    useEffect(() => {
+        form.reset({
+            query: params.get("q") || "",
+        })
+    }, [params])
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         values.query.length? router.push(`?q=${values.query}`) : router.push('/home')
