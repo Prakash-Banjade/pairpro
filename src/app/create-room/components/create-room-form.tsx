@@ -137,15 +137,16 @@ export default function CreateRoomForm({ }: Props) {
                                                         placeholder={formField.placeholder}
                                                         className="resize-none"
                                                         {...field}
+                                                        value={field.value instanceof Object ? undefined : field.value}
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         ) : formField.name === 'visibility' ? (
-                                            SelectRadioGroup(formField, field.onChange, field.value)
+                                            SelectRadioGroup(formField, field.onChange, field.value instanceof Object ? undefined : field.value)
                                         ) : (
                                             <FormControl>
-                                                <Input className={clsx(formField.name !== 'githubRepo' && 'capitalize')} type={formField.type} placeholder={formField.placeholder} {...field} />
+                                                <Input className={clsx(formField.name !== 'githubRepo' && 'capitalize')} type={formField.type} placeholder={formField.placeholder} {...field} value={field.value instanceof Object ? undefined : field.value} />
                                             </FormControl>
                                         )
                                     }

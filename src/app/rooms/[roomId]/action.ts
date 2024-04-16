@@ -30,8 +30,7 @@ export async function updateRoom(id: string, data: CreateRoomFormSchema) {
     if (!user) throw new Error('Unauthorized')
 
     try {
-        const result = await db.update(room).set(data).where(eq(room.id, id));
-        return result;
+        await db.update(room).set(data).where(eq(room.id, id));
     } catch (e) {
         console.log(e)
     }

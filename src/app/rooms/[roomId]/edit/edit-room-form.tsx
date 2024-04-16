@@ -140,15 +140,16 @@ export default function EditRoomForm({ room }: Props) {
                                                         placeholder={formField.placeholder}
                                                         className="resize-none"
                                                         {...field}
+                                                        value={field.value instanceof Object ? '' : field.value}
                                                     />
                                                 </FormControl>
                                                 <FormMessage />
                                             </FormItem>
                                         ) : formField.name === 'visibility' ? (
-                                            SelectRadioGroup(formField, field.onChange, field.value)
+                                            SelectRadioGroup(formField, field.onChange, field.value instanceof Object ? '' : field.value)
                                         ) : (
                                             <FormControl>
-                                                <Input className={clsx(formField.name !== 'githubRepo' && 'capitalize')} autoFocus={i === 0} type={formField.type} placeholder={formField.placeholder} {...field} />
+                                                <Input className={clsx(formField.name !== 'githubRepo' && 'capitalize')} autoFocus={i === 0} type={formField.type} placeholder={formField.placeholder} {...field} value={field.value instanceof Object ? '' : field.value} />
                                             </FormControl>
                                         )
                                     }

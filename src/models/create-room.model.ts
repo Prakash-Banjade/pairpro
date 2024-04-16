@@ -20,6 +20,11 @@ export const createRoomFormSchema = z.object({
         { message: "Invalid Github Repo" }
     ),
     visibility: z.enum(['public', 'private'], { required_error: 'Visibility must be public or private' }).default('public'),
+    allowedUsers: z.array(
+        z.object({
+            user: z.string().optional(),
+        })
+    ).optional(),
 })
 
 export type CreateRoomFormSchema = z.infer<typeof createRoomFormSchema>
