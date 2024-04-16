@@ -3,12 +3,13 @@
 import { CreateRoomFormField, createRoomFormFields, CreateRoomFormSchema, createRoomFormSchema } from '@/models/create-room.model'
 import React from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from 'react-hook-form'
+import { useFieldArray, UseFieldArrayReturn, useForm, UseFormReturn } from 'react-hook-form'
 
 import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
+    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -24,8 +25,12 @@ import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { MdOutlinePublic } from "react-icons/md";
 import { RiGitRepositoryPrivateLine } from "react-icons/ri";
+import { cn } from '@/lib/utils'
 
-type Props = {}
+type AllowedUsersFieldProps = {
+    field: UseFieldArrayReturn<CreateRoomFormSchema, 'allowedUsers', 'id'>
+    form: UseFormReturn<CreateRoomFormSchema, any, undefined>
+}
 
 const SelectRadioGroup = (field: CreateRoomFormField, onChange: () => void, value: string | undefined) => {
     const options = [
@@ -73,7 +78,51 @@ const SelectRadioGroup = (field: CreateRoomFormField, onChange: () => void, valu
     </FormItem>
 }
 
-export default function CreateRoomForm({ }: Props) {
+const AllowedUsersField = ({ field: { fields, append }, form }: AllowedUsersFieldProps) => {
+    return (
+        <div>
+            <section>
+                {
+                    fields.length === 0 && <FormLabel>Add users that can join the room</FormLabel>
+                }
+            </section>
+
+            {fields.map((field, index) => (
+                <FormField
+                    control={form.control}
+                    key={field.id}
+                    name={`allowedUsers.${index}.user`}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>
+                                Allowed users
+                            </FormLabel>
+                            <FormControl>
+                                <Input {...field} placeholder="user_email@mail.com" />
+                            </FormControl>
+                            <FormDescription>Mention the email address of users to allow them join the room</FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+            ))}
+            <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="mt-2"
+                disabled={form.watch('allowedUsers') && form.getValues('allowedUsers')?.at(-1)?.user === ''}
+                onClick={() => {
+                    form.getValues('allowedUsers')?.at(-1)?.user !== '' && append({ user: "" })
+                }}
+            >
+                Add {fields.length === 0 ? 'user' : 'another'}
+            </Button>
+        </div>
+    )
+}
+
+export default function CreateRoomForm() {
     const router = useRouter();
 
     const form = useForm<CreateRoomFormSchema>({
@@ -84,12 +133,21 @@ export default function CreateRoomForm({ }: Props) {
             visibility: 'public',
             tags: '',
             roomName: '',
+            allowedUsers: [],
         },
     })
 
+    const fieldArray = useFieldArray({
+        control: form.control,
+        name: "allowedUsers",
+    })
+
     async function onSubmit(values: CreateRoomFormSchema) {
-        // console.log(values)
-        const result = createRoom(values)
+
+        const result = createRoom({
+            ...values,
+            allowedUsers: values.visibility === 'private' ? values.allowedUsers : [],
+        })
 
         toast.promise(result, {
             loading: 'Creating room...',
@@ -155,6 +213,9 @@ export default function CreateRoomForm({ }: Props) {
                             )}
                         />
                     ))
+                }
+                {
+                    form.watch('visibility') === 'private' && <AllowedUsersField field={fieldArray} form={form} />
                 }
                 <div className='flex'>
                     <Button type="submit" className='ml-auto'>Create room</Button>

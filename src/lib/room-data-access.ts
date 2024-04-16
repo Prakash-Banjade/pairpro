@@ -19,6 +19,11 @@ export async function getRooms(search: string | undefined) {
                     first_name: true,
                     last_name: true,
                 }
+            },
+            allowedUsers: {
+                columns: {
+                    userId: true
+                }
             }
         },
     })
