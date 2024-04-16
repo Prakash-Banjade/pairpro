@@ -17,6 +17,7 @@ import TagsList from '@/components/utils/tags-list'
 import { cn } from '@/lib/utils'
 import clsx from 'clsx'
 import RoomDeleteBtn from './room-delete-btn'
+import EditRoomBtn from './room-edit-btn'
 
 
 
@@ -40,7 +41,10 @@ export function RoomCard({ room, className = '', join = true, header = true, sel
     return (
         <Card className={cn('', className)}>
             {header && <CardHeader className={clsx(!join && 'p-0')}>
-                <CardTitle className='xl:text-2xl text-lg'>{room.roomName}</CardTitle>
+                <header className='flex justify-between gap-3'>
+                    <CardTitle className='xl:text-2xl text-lg'>{room.roomName}</CardTitle>
+                    {self && <EditRoomBtn roomId={room.id} />}
+                </header>
                 <CardDescription className='line-clamp-2'>{room.description}</CardDescription>
             </CardHeader>}
             <CardContent className={clsx(!join && 'p-0', 'space-y-3')}>

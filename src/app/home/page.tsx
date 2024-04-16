@@ -12,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 type Props = {
     searchParams: {
         q: string | undefined,
+        t: string | undefined,
     },
     self: boolean,
 }
@@ -34,12 +35,13 @@ const Rooms = async (props: Props) => {
 
 export default async function HomePage(props: Omit<Props, 'self'>) {
     const q = props.searchParams.q?.length || 0;
+    const t = props.searchParams.t || 'all'
 
     return (
-        <Tabs defaultValue="all" className="w-full">
+        <Tabs defaultValue={t} className="w-full">
             <TabsList className='mb-5'>
                 <TabsTrigger value="all">All rooms</TabsTrigger>
-                <TabsTrigger value="my rooms">My rooms</TabsTrigger>
+                <TabsTrigger value="self">My rooms</TabsTrigger>
             </TabsList>
             <TabsContent value="all">
                 <div>
@@ -60,7 +62,7 @@ export default async function HomePage(props: Omit<Props, 'self'>) {
                     </Suspense>
                 </div>
             </TabsContent>
-            <TabsContent value="my rooms">
+            <TabsContent value="self">
                 <div>
                     <section className='flex justify-between items-center mb-8'>
                         <H1 className='capitalize mb-0'>My rooms</H1>

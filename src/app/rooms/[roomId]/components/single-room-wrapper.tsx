@@ -10,7 +10,7 @@ import { VideoPlayer } from './video-player'
 import { User } from '@/db/schema'
 import { RoomCard } from '@/app/home/components/room-list'
 import { CallParticipantsList, StreamCall, StreamCallProvider, StreamTheme, StreamVideoClient, StreamVideoProvider } from '@stream-io/video-react-sdk'
-import generateStreamToken from './action'
+import generateStreamToken from '../action'
 import { Call } from '@stream-io/video-react-sdk';
 import '@stream-io/video-react-sdk/dist/css/styles.css';
 import useBeforeUnload from '@/hooks/useBeforeUnload'
