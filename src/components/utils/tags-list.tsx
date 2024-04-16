@@ -18,7 +18,7 @@ export default function TagsList({ tags }: Props) {
                 tagsArray.map((tag, index) => <button
                     className={badgeVariants({ variant: 'secondary' })}
                     aria-roledescription='tag'
-                    onClick={() => router.push(`?q=${tag}`)}
+                    onClick={() => router.push(`/home?q=${tag}`)}
                     key={index}
                 >
                     {tag}
