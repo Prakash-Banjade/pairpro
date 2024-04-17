@@ -1,14 +1,14 @@
 import db from "@/db"
 import { getCurrentUser } from "./user-data-access"
 import { redirect } from "next/navigation"
-import { ilike } from "drizzle-orm"
+import { ilike, or } from "drizzle-orm"
 import { room } from "@/db/schema"
 
 export async function getRooms(search: string | undefined) {
     const currentUser = await getCurrentUser()
     if (!currentUser) return redirect('/sign-in')
 
-    const where = search ? ilike(room.tags, `%${search}%`) : undefined;
+    const where = search ? or(ilike(room.tags, `%${search}%`), ilike(room.roomName, `%${search}%`)) : undefined;
 
     const rooms = await db.query.room.findMany({
         where,
@@ -65,6 +65,11 @@ export async function getSelfRooms(search: string) {
                     id: true,
                     first_name: true,
                     last_name: true,
+                }
+            },
+            allowedUsers: {
+                columns: {
+                    userId: true
                 }
             }
         },

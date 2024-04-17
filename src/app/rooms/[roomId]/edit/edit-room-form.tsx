@@ -24,11 +24,11 @@ import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { MdOutlinePublic } from "react-icons/md";
 import { RiGitRepositoryPrivateLine } from "react-icons/ri";
-import { RoomWithCreator } from '../../../../../types'
+import { ExtendedRoom } from '../../../../../types'
 import { updateRoom } from '../action'
 
 type Props = {
-    room: RoomWithCreator,
+    room: ExtendedRoom,
 }
 
 const SelectRadioGroup = (field: CreateRoomFormField, onChange: () => void, value: string | undefined) => {

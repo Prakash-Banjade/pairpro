@@ -12,7 +12,7 @@ import { formatDistanceToNow } from 'date-fns'
 import Link from 'next/link'
 import { FaGithub } from "react-icons/fa";
 import { Button } from '@/components/ui/button'
-import { RoomWithCreator } from '../../../../types'
+import { ExtendedRoom } from '../../../../types'
 import TagsList from '@/components/utils/tags-list'
 import { cn } from '@/lib/utils'
 import clsx from 'clsx'
@@ -22,12 +22,12 @@ import EditRoomBtn from './room-edit-btn'
 
 
 type Props = {
-    rooms: RoomWithCreator[],
+    rooms: ExtendedRoom[],
     self: boolean,
 }
 
 interface RoomCardProps {
-    room: RoomWithCreator
+    room: ExtendedRoom
     className?: string
     join?: boolean
     header?: boolean

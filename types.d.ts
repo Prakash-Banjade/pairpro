@@ -1,3 +1,6 @@
 import { Room, User } from "@/db/schema";
 
-export type RoomWithCreator = Room & { creator: Partial<User> }
+export type ExtendedRoom = Room & {
+    creator: Partial<User>,
+    allowedUsers: { userId: string }[]
+}

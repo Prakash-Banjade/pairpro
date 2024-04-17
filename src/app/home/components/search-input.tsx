@@ -59,7 +59,7 @@ export default function SearchInput() {
                     render={({ field }) => (
                         <FormItem className="flex-1 max-w-2xl">
                             <FormControl>
-                                <Input placeholder="Search rooms with tags (go, rust, python)" type="search" {...field} />
+                                <Input placeholder="Search rooms with tags (go, rust, python) or by name" type="search" {...field} />
                             </FormControl>
                             <FormMessage className="sr-only" />
                         </FormItem>
