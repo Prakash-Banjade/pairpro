@@ -21,9 +21,10 @@ export const createRoomFormSchema = z.object({
     visibility: z.enum(['public', 'private'], { required_error: 'Visibility must be public or private' }).default('public'),
     allowedUsers: z.array(
         z.object({
-            user: z.string().email({ message: 'Invalid email' }).optional(),
+            user: z.string().email({ message: 'Invalid email' }),
         })
-    ).default([]).optional(),
+    ).default([]),
+    allowedUsersList: z.array(z.string()).default([]),
 })
 
 export type CreateRoomFormSchema = z.infer<typeof createRoomFormSchema>

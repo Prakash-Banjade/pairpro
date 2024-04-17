@@ -134,6 +134,7 @@ export default function CreateRoomForm() {
             tags: '',
             roomName: '',
             allowedUsers: [],
+            allowedUsersList: [],
         },
     })
 
@@ -143,10 +144,10 @@ export default function CreateRoomForm() {
     })
 
     async function onSubmit(values: CreateRoomFormSchema) {
-
         const result = createRoom({
             ...values,
             allowedUsers: values.visibility === 'private' ? values.allowedUsers : [],
+            allowedUsersList: values.visibility === 'private' ? values.allowedUsers.map(({ user }) => user) : [],
         })
 
         toast.promise(result, {

@@ -137,6 +137,8 @@ export default function EditRoomForm({ room }: Props) {
             visibility: room.visibility,
             tags: room.tags || '',
             roomName: room.roomName,
+            allowedUsersList: [],
+            allowedUsers: room.allowedUsersList.map(user => ({ user })) || [],
         },
     })
 
@@ -146,6 +148,14 @@ export default function EditRoomForm({ room }: Props) {
     })
 
     async function onSubmit(values: CreateRoomFormSchema) {
+
+        let allowedUsersList: string[] = []
+        if (values.visibility === 'private' && values.allowedUsers?.length) {
+            values.allowedUsers.forEach(({ user }) => {
+                if (user) allowedUsersList.push(user)
+            })
+        }
+
         const result = updateRoom(room.id, values)
 
         toast.promise(result, {

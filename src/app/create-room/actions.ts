@@ -14,8 +14,11 @@ export const createRoom = async (formData: CreateRoomFormSchema) => {
     const currentUser = await getCurrentUser()
     if (!currentUser) throw new Error('Unauthorized')
 
+    const allowedUsersList = parsedData.allowedUsersList || []
+
     const newRoom = await db.insert(room).values({
         creatorId: currentUser.id,
+        allowedUsersList,
         ...parsedData
     }).returning();
 
