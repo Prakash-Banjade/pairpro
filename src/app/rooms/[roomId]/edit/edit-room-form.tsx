@@ -3,12 +3,13 @@
 import { CreateRoomFormField, createRoomFormFields, CreateRoomFormSchema, createRoomFormSchema } from '@/models/create-room.model'
 import React from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from 'react-hook-form'
+import { useFieldArray, UseFieldArrayReturn, useForm, UseFormReturn } from 'react-hook-form'
 
 import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
+    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -19,7 +20,6 @@ import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import clsx from 'clsx'
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { createRoom } from '@/app/create-room/actions'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { MdOutlinePublic } from "react-icons/md";
@@ -29,6 +29,11 @@ import { updateRoom } from '../action'
 
 type Props = {
     room: ExtendedRoom,
+}
+
+type AllowedUsersFieldProps = {
+    field: UseFieldArrayReturn<CreateRoomFormSchema, 'allowedUsers', 'id'>
+    form: UseFormReturn<CreateRoomFormSchema, any, undefined>
 }
 
 const SelectRadioGroup = (field: CreateRoomFormField, onChange: () => void, value: string | undefined) => {
@@ -77,6 +82,50 @@ const SelectRadioGroup = (field: CreateRoomFormField, onChange: () => void, valu
     </FormItem>
 }
 
+const AllowedUsersField = ({ field: { fields, append }, form }: AllowedUsersFieldProps) => {
+    return (
+        <div>
+            <section>
+                {
+                    fields.length === 0 && <FormLabel>Add users that can join the room</FormLabel>
+                }
+            </section>
+
+            {fields.map((field, index) => (
+                <FormField
+                    control={form.control}
+                    key={field.id}
+                    name={`allowedUsers.${index}.user`}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>
+                                Allowed users
+                            </FormLabel>
+                            <FormControl>
+                                <Input {...field} placeholder="user_email@mail.com" />
+                            </FormControl>
+                            <FormDescription>Mention the email address of users to allow them join the room</FormDescription>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+            ))}
+            <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="mt-2"
+                disabled={form.watch('allowedUsers') && form.getValues('allowedUsers')?.at(-1)?.user === ''}
+                onClick={() => {
+                    form.getValues('allowedUsers')?.at(-1)?.user !== '' && append({ user: "" })
+                }}
+            >
+                Add {fields.length === 0 ? 'user' : 'another'}
+            </Button>
+        </div>
+    )
+}
+
 export default function EditRoomForm({ room }: Props) {
     const router = useRouter();
 
@@ -91,6 +140,11 @@ export default function EditRoomForm({ room }: Props) {
         },
     })
 
+    const fieldArray = useFieldArray({
+        control: form.control,
+        name: "allowedUsers",
+    })
+
     async function onSubmit(values: CreateRoomFormSchema) {
         const result = updateRoom(room.id, values)
 
@@ -101,8 +155,9 @@ export default function EditRoomForm({ room }: Props) {
         })
 
         result.then(() => router.push('/home?t=self'))
-
     }
+
+    console.log('allowedUsers: ', room)
 
     return (
         <Form {...form}>
@@ -158,6 +213,9 @@ export default function EditRoomForm({ room }: Props) {
                             )}
                         />
                     ))
+                }
+                {
+                    form.watch('visibility') === 'private' && <AllowedUsersField field={fieldArray} form={form} />
                 }
                 <div className='flex gap-3 justify-end'>
                     <Button type="reset" variant={'outline'} className='' onClick={() => router.push('/home')}>Discard</Button>

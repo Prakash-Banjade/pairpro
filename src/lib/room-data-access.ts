@@ -41,6 +41,11 @@ export async function getSingleRoom(roomId: string) {
                         first_name: true,
                         last_name: true,
                     }
+                },
+                allowedUsers: {
+                    columns: {
+                        userId: true,
+                    }
                 }
             }
         })

@@ -2,9 +2,10 @@
 
 import { zodValidate } from "@/components/utils/zodValidate";
 import db from "@/db";
-import { NewRoom, allowedUsersOnRoom, room } from "@/db/schema";
+import { NewRoom, allowedUsersOnRoom, room, users } from "@/db/schema";
 import { getCurrentUser } from "@/lib/user-data-access";
 import { CreateRoomFormSchema, createRoomFormSchema } from "@/models/create-room.model";
+import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 export const createRoom = async (formData: CreateRoomFormSchema) => {
@@ -21,15 +22,25 @@ export const createRoom = async (formData: CreateRoomFormSchema) => {
     if (parsedData.visibility === 'private') {
         try {
             parsedData.allowedUsers?.forEach(async ({ user }) => {
-                user && await db.insert(allowedUsersOnRoom).values({
-                    roomId: newRoom[0].id,
-                    userId: currentUser.id
-                })
+                const foundUser = user && await db.query.users.findFirst({ where: eq(users.email, user) })
+
+                if (foundUser) addUserToRoomAllowedList({ roomId: newRoom[0].id, userId: foundUser.id })
             })
         } catch (e) {
             console.log(e)
         }
     }
-    
+
     revalidatePath('/home')
+}
+
+async function addUserToRoomAllowedList({ roomId, userId }: { roomId: string, userId: string }) {
+    try {
+        await db.insert(allowedUsersOnRoom).values({
+            roomId,
+            userId
+        })
+    } catch (e) {
+        console.log(e)
+    }
 }
