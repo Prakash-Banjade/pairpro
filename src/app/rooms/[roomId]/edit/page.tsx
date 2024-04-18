@@ -3,7 +3,6 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 import EditRoomForm from './edit-room-form';
 import { getCurrentUser } from '@/lib/user-data-access';
-import { H1 } from '@/components/ui/typography';
 
 type Props = {
     params: {

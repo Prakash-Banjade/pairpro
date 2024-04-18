@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { RoomWithCreator } from '../../../../../types'
+import { ExtendedRoom } from '../../../../../types'
 import { H2, H3 } from '../../../../components/ui/typography'
 import { Button } from '../../../../components/ui/button'
 import Link from 'next/link'
@@ -13,10 +13,9 @@ import { CallParticipantsList, StreamCall, StreamCallProvider, StreamTheme, Stre
 import generateStreamToken from '../action'
 import { Call } from '@stream-io/video-react-sdk';
 import '@stream-io/video-react-sdk/dist/css/styles.css';
-import useBeforeUnload from '@/hooks/useBeforeUnload'
 
 type Props = {
-    room: RoomWithCreator | undefined,
+    room: ExtendedRoom | undefined,
     currentUser: User,
 }
 
@@ -95,7 +94,7 @@ export default function SingleRoomWrapper({ room, currentUser }: Props) {
     )
 }
 
-function RoomAsideContent({ room }: { room: RoomWithCreator }) {
+function RoomAsideContent({ room }: { room: ExtendedRoom }) {
     return (
         <div className='space-y-5'>
             <section className=''>

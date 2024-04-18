@@ -1,4 +1,5 @@
 import { H1 } from '@/components/ui/typography'
+import BackBtn from '@/components/utils/back-btn'
 import React, { Suspense } from 'react'
 
 type Props = {
@@ -10,6 +11,7 @@ export default function EditRoomLayout({
 }: Props) {
     return (
         <div className='container py-10'>
+            <BackBtn />
             <H1>Edit Room</H1>
             <Suspense fallback={<div>Loading...</div>}>
                 {children}
