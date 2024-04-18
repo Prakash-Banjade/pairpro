@@ -13,8 +13,6 @@ import Link from 'next/link'
 import { FaGithub } from "react-icons/fa";
 import { Button } from '@/components/ui/button'
 import TagsList from '@/components/utils/tags-list'
-import RoomDeleteBtn from './room-delete-btn'
-import EditRoomBtn from './room-edit-btn'
 import { MoreOptionsBtn } from './room-options'
 
 interface RoomCardProps {
