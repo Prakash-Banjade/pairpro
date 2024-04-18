@@ -9,10 +9,11 @@ import Image from 'next/image'
 import { VideoPlayer } from './video-player'
 import { User } from '@/db/schema'
 import { RoomCard } from '@/app/home/components/room-list'
-import { CallParticipantsList, StreamCall, StreamCallProvider, StreamTheme, StreamVideoClient, StreamVideoProvider } from '@stream-io/video-react-sdk'
+import { CallParticipantsList, StreamCallProvider, StreamTheme, StreamVideoClient, StreamVideoProvider } from '@stream-io/video-react-sdk'
 import generateStreamToken from '../action'
 import { Call } from '@stream-io/video-react-sdk';
 import '@stream-io/video-react-sdk/dist/css/styles.css';
+import { env } from '@/config/env.config'
 
 type Props = {
     room: ExtendedRoom | undefined,
@@ -23,14 +24,13 @@ export default function SingleRoomWrapper({ room, currentUser }: Props) {
     const [call, setCall] = useState<Call | undefined>()
     const [client, setClient] = useState<StreamVideoClient | undefined>()
 
-
     useEffect(() => {
         if (!room) return;
 
         const user_name = currentUser.first_name + ' ' + currentUser.last_name
 
         const client = new StreamVideoClient({
-            apiKey: 'f2ns3n38gg4c',
+            apiKey: env.NEXT_PUBLIC_STREAM_API_KEY,
             user: {
                 id: currentUser.id,
                 name: user_name,

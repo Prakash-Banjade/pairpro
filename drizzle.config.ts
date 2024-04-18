@@ -1,5 +1,5 @@
+import { env } from '@/config/env.config'
 import { defineConfig } from 'drizzle-kit'
-import { env } from './environment'
 export default defineConfig({
     schema: "./src/db/schema.ts",
     driver: 'pg',
