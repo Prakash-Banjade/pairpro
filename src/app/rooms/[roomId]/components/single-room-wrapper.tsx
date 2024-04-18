@@ -46,8 +46,8 @@ export default function SingleRoomWrapper({ room, currentUser }: Props) {
         setCall(call)
 
         return () => {
-            client.disconnectUser()
-            call.endCall()
+             client.disconnectUser();
+             setClient(undefined)
         }
     }, [room, currentUser])
 
