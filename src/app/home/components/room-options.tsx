@@ -9,17 +9,27 @@ import { HiOutlineDotsHorizontal } from 'react-icons/hi'
 import { useRouter } from 'next/navigation'
 import { FaEdit, FaEye } from 'react-icons/fa'
 import DialogWrapper from '@/components/utils/dialog-wrapper'
+import { IoCopyOutline } from "react-icons/io5";
+import { env } from '@/config/env.config'
+import toast from 'react-hot-toast'
 
 type Props = {
     room: ExtendedRoom,
+    self?: boolean,
 }
 
-export function MoreOptionsBtn({ room }: Props) {
+export function MoreOptionsBtn({ room, self = false }: Props) {
 
     const router = useRouter();
 
     function handleEditClick() {
         router.push(`/rooms/${room.id}/edit`)
+    }
+
+    function handleCopyLinkClick() {
+        navigator.clipboard.writeText(`${env.NEXT_PUBLIC_FRONTEND_URL}/rooms/${room.id}`).then(() => {
+            toast.success('Copied to clipboard!')
+        })
     }
 
     return (
@@ -42,13 +52,17 @@ export function MoreOptionsBtn({ room }: Props) {
                         </Button>
                     }
                 />
-                <DropdownMenuItem>
+                <DropdownMenuItem className='flex gap-2 items-center' onClick={handleCopyLinkClick}>
+                    <IoCopyOutline size={16} />
+                    Copy Link
+                </DropdownMenuItem>
+                {self && <DropdownMenuItem>
                     <button onClick={handleEditClick} className='flex gap-2 items-center'>
                         <span className='text-blue-500'><FaEdit /></span>
                         Edit
                     </button>
-                </DropdownMenuItem>
-                <RoomDeleteBtn roomId={room.id} />
+                </DropdownMenuItem>}
+                {self && <RoomDeleteBtn roomId={room.id} />}
             </DropdownMenuContent>
         </DropdownMenu>
 

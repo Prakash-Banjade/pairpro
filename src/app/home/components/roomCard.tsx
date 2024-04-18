@@ -47,7 +47,7 @@ export function RoomCard({ room, self = false }: RoomCardProps) {
 
     return (
         <Card className='bg-secondary border hover:border-secondary-foreground transition-all relative'>
-            {self && <MoreOptionsBtn room={room} />}
+            <MoreOptionsBtn room={room} self={self} />
             <CardHeader className='pb-0'>
                 <header className='flex justify-between gap-3'>
                     <div className='flex flex-col'>
