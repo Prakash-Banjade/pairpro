@@ -47,7 +47,7 @@ export function RoomCard({ room, self = false }: RoomCardProps) {
 
     return (
         <Card className='bg-secondary border hover:border-secondary-foreground transition-all relative'>
-            <MoreOptionsBtn room={room} />
+            {self && <MoreOptionsBtn room={room} />}
             <CardHeader className='pb-0'>
                 <header className='flex justify-between gap-3'>
                     <div className='flex flex-col'>
@@ -68,8 +68,6 @@ export function RoomCard({ room, self = false }: RoomCardProps) {
                             Join
                         </Link>
                     </Button>
-                    {self && <EditRoomBtn roomId={room.id} />}
-                    {self && <RoomDeleteBtn roomId={room.id} />}
                 </div>
             </CardFooter>
         </Card>
