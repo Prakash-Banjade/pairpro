@@ -198,7 +198,6 @@ export default function CreateRoomForm() {
                                                         value={field.value instanceof Object ? undefined : field.value}
                                                     />
                                                 </FormControl>
-                                                <FormMessage />
                                             </FormItem>
                                         ) : formField.name === 'visibility' ? (
                                             SelectRadioGroup(formField, field.onChange, field.value instanceof Object ? undefined : field.value)
