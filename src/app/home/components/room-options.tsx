@@ -46,7 +46,7 @@ export function MoreOptionsBtn({ room, self = false }: Props) {
                         <p className='font-light'>{room.description}</p>
                     }
                     trigger={
-                        <Button variant={'ghost'} size={'sm'} className='flex gap-2 w-full text-left justify-start px-1 rounded-sm text-sm items-center'>
+                        <Button variant={'ghost'} size={'sm'} className='flex gap-2 w-full text-left justify-start px-2 rounded-sm text-sm items-center'>
                             <FaEye size={16} />
                             View Description
                         </Button>
@@ -58,7 +58,7 @@ export function MoreOptionsBtn({ room, self = false }: Props) {
                 </DropdownMenuItem>
                 {self && <DropdownMenuItem asChild onClick={handleEditClick}>
                     <button className='flex gap-2 items-center w-full'>
-                        <span className='text-blue-500'><FaEdit /></span>
+                        <span className='text-blue-500'><FaEdit size={16} /></span>
                         Edit
                     </button>
                 </DropdownMenuItem>}

@@ -32,7 +32,7 @@ export async function getRooms(search: string | undefined) {
 
     const filteredRooms = rooms.filter((room) => {
         return (
-            room.allowedUsersList.some((email) => email === currentUser.email) || room.creatorId === currentUser.id
+            room.visibility === 'public' || room.allowedUsersList.some((email) => email === currentUser.email) || room.creatorId === currentUser.id
         )
     })
     

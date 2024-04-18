@@ -38,7 +38,7 @@ export default function RoomDeleteBtn({ roomId }: Props) {
         <AlertDialog>
             <AlertDialogTrigger asChild>
                 <Button variant={'ghost'} size={'sm'} className='flex gap-2 w-full text-left justify-start px-1 rounded-sm text-sm items-center'>
-                    <span className='text-red-500'><MdDeleteOutline size={18} /></span>
+                    <span className='text-red-500'><MdDeleteOutline size={19} /></span>
                     Delete
                 </Button>
             </AlertDialogTrigger>
