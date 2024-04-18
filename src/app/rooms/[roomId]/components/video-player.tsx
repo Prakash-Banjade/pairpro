@@ -1,26 +1,28 @@
 'use client'
 
 import { User } from '@/db/schema';
-import { RoomWithCreator } from '../../../../../types';
-import { CallControls, PaginatedGridLayout, useStreamVideoClient } from '@stream-io/video-react-sdk';
+import { ExtendedRoom } from '../../../../../types';
+import { CallControls, PaginatedGridLayout, useCall, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useRouter } from 'next/navigation';
-import { H2 } from '@/components/ui/typography';
 
 type Props = {
     user: User | undefined,
-    room: RoomWithCreator,
+    room: ExtendedRoom,
 }
 
-export const VideoPlayer = ({ user, room }: Props) => {
+export const VideoPlayer = ({ }: Props) => {
 
     const router = useRouter();
-    const client = useStreamVideoClient();
+    const call = useCall()
+    const client = useStreamVideoClient()
 
     return (
         <>
             <PaginatedGridLayout />
             <CallControls onLeave={() => {
                 router.push('/home')
+                call?.endCall()
+                client?.disconnectUser()
             }} />
         </>
     );

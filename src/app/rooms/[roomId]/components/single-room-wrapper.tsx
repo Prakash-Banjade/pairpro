@@ -39,14 +39,15 @@ export default function SingleRoomWrapper({ room, currentUser }: Props) {
         });
         setClient(client)
 
+        client.connectUser({ id: currentUser.id, name: user_name }, room.id);
+
         const call = client.call('default', room.id);
         call.join({ create: true });
         setCall(call)
 
         return () => {
-            call.leave().then(() => {
-                client.disconnectUser()
-            }).catch(console.error)
+            client.disconnectUser()
+            call.endCall()
         }
     }, [room, currentUser])
 

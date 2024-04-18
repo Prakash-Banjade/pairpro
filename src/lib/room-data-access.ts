@@ -27,7 +27,16 @@ export async function getRooms(search: string | undefined) {
             }
         },
     })
-    return rooms
+
+    // filter out rooms that the user is not allowed to see based on user email
+
+    const filteredRooms = rooms.filter((room) => {
+        return (
+            room.allowedUsersList.some((email) => email === currentUser.email) || room.creatorId === currentUser.id
+        )
+    })
+    
+    return filteredRooms;
 }
 
 export async function getSingleRoom(roomId: string) {
