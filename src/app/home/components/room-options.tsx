@@ -25,7 +25,7 @@ export function MoreOptionsBtn({ room }: Props) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button size={'icon'} variant={'ghost'} className='absolute top-3 right-3'>
+                <Button size={'icon'} variant={'ghost'} className='absolute top-1.5 right-1.5'>
                     <HiOutlineDotsHorizontal />
                 </Button>
             </DropdownMenuTrigger>
