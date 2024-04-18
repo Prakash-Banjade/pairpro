@@ -13,7 +13,8 @@ import generateStreamToken from '../action'
 import { Call } from '@stream-io/video-react-sdk';
 import '@stream-io/video-react-sdk/dist/css/styles.css';
 import { env } from '@/config/env.config'
-import { RoomCard } from '@/app/home/components/roomCard'
+import { GitHubLink, RoomCard } from '@/app/home/components/roomCard'
+import TagsList from '@/components/utils/tags-list'
 
 type Props = {
     room: ExtendedRoom | undefined,
@@ -100,10 +101,10 @@ function RoomAsideContent({ room }: { room: ExtendedRoom }) {
         <div className='space-y-5'>
             <section className=''>
                 <H2 className='tracking-tight mb-0'>{room.roomName}</H2>
-                <p className='line-clamp-2 text-xs mb-3'>{room.description}</p>
+                <p className='text-xs mb-3'>{room.description}</p>
+                <TagsList tags={room.tags} />
+                <GitHubLink repo={room.githubRepo} />
             </section>
-            <RoomCard room={room} self={false} />
-            {/* <ParticipantsList /> */}
             <CallParticipantsList onClose={() => { }} />
         </div>
     )

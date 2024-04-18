@@ -22,7 +22,7 @@ interface RoomCardProps {
     self: boolean
 }
 
-function GitHubLink({ repo }: { repo: string | null }) {
+export function GitHubLink({ repo }: { repo: string | null }) {
     if (!repo) return null
 
     const username = repo.split('/')[3]
