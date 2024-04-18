@@ -16,7 +16,7 @@ export default function TooltipWrapper({ children, title }: Props) {
     return (
         <TooltipProvider>
             <Tooltip>
-                <TooltipTrigger>{children}</TooltipTrigger>
+                <TooltipTrigger asChild>{children}</TooltipTrigger>
                 <TooltipContent>
                     <p>{title}</p>
                 </TooltipContent>

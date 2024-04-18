@@ -8,12 +8,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { VideoPlayer } from './video-player'
 import { User } from '@/db/schema'
-import { RoomCard } from '@/app/home/components/room-list'
 import { CallParticipantsList, StreamCallProvider, StreamTheme, StreamVideoClient, StreamVideoProvider } from '@stream-io/video-react-sdk'
 import generateStreamToken from '../action'
 import { Call } from '@stream-io/video-react-sdk';
 import '@stream-io/video-react-sdk/dist/css/styles.css';
 import { env } from '@/config/env.config'
+import { RoomCard } from '@/app/home/components/roomCard'
 
 type Props = {
     room: ExtendedRoom | undefined,
@@ -46,8 +46,8 @@ export default function SingleRoomWrapper({ room, currentUser }: Props) {
         setCall(call)
 
         return () => {
-             client.disconnectUser();
-             setClient(undefined)
+            client.disconnectUser();
+            setClient(undefined)
         }
     }, [room, currentUser])
 
@@ -102,7 +102,7 @@ function RoomAsideContent({ room }: { room: ExtendedRoom }) {
                 <H2 className='tracking-tight mb-0'>{room.roomName}</H2>
                 <p className='line-clamp-2 text-xs mb-3'>{room.description}</p>
             </section>
-            <RoomCard room={room} className='border-none mb-10' join={false} header={false} self={false} />
+            <RoomCard room={room} self={false} />
             {/* <ParticipantsList /> */}
             <CallParticipantsList onClose={() => { }} />
         </div>

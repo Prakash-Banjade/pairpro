@@ -15,6 +15,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { CircleBackslashIcon, TrashIcon } from "@radix-ui/react-icons"
+import { MdDelete, MdDeleteOutline } from "react-icons/md"
 
 
 type Props = {
@@ -36,7 +37,10 @@ export default function RoomDeleteBtn({ roomId }: Props) {
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button variant={'destructive'}>Delete</Button>
+                <Button variant={'ghost'} size={'sm'} className='flex gap-2 w-full text-left justify-start px-1 rounded-sm text-sm items-center'>
+                    <span className='text-red-500'><MdDeleteOutline size={18} /></span>
+                    Delete
+                </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
@@ -49,7 +53,7 @@ export default function RoomDeleteBtn({ roomId }: Props) {
                     <AlertDialogCancel>
                         <CircleBackslashIcon className="mr-2 h-4 w-4" />
                         Cancel
-                        </AlertDialogCancel>
+                    </AlertDialogCancel>
                     <AlertDialogAction className={buttonVariants({ variant: 'destructive' })} onClick={handleDelete}>
                         <TrashIcon className="mr-2 h-4 w-4" />
                         Delete

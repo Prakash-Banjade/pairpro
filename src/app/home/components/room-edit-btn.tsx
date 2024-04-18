@@ -17,7 +17,7 @@ export default function EditRoomBtn({ roomId }: Props) {
     }
     
     return (
-        <Button variant={'secondary'} size={'icon'} onClick={handleEditClick}>
+        <Button variant={'outline'} size={'icon'} onClick={handleEditClick}>
             <FaEdit />
         </Button>
     )

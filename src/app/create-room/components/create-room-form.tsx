@@ -25,7 +25,6 @@ import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { MdOutlinePublic } from "react-icons/md";
 import { RiGitRepositoryPrivateLine } from "react-icons/ri";
-import { cn } from '@/lib/utils'
 
 type AllowedUsersFieldProps = {
     field: UseFieldArrayReturn<CreateRoomFormSchema, 'allowedUsers', 'id'>
@@ -164,7 +163,7 @@ export default function CreateRoomForm() {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 {
-                    createRoomFormFields.map((formField: CreateRoomFormField) => (
+                    createRoomFormFields.map((formField: CreateRoomFormField, i: number) => (
                         <FormField
                             control={form.control}
                             key={formField.name}
@@ -205,7 +204,7 @@ export default function CreateRoomForm() {
                                             SelectRadioGroup(formField, field.onChange, field.value instanceof Object ? undefined : field.value)
                                         ) : (
                                             <FormControl>
-                                                <Input className={clsx(formField.name !== 'githubRepo' && 'capitalize')} type={formField.type} placeholder={formField.placeholder} {...field} value={field.value instanceof Object ? undefined : field.value} />
+                                                <Input className={clsx(formField.name !== 'githubRepo' && 'capitalize')} autoFocus={i === 0} type={formField.type} placeholder={formField.placeholder} {...field} value={field.value instanceof Object ? undefined : field.value} />
                                             </FormControl>
                                         )
                                     }
