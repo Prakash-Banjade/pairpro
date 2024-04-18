@@ -56,8 +56,8 @@ export function MoreOptionsBtn({ room, self = false }: Props) {
                     <IoCopyOutline size={16} />
                     Copy Link
                 </DropdownMenuItem>
-                {self && <DropdownMenuItem>
-                    <button onClick={handleEditClick} className='flex gap-2 items-center'>
+                {self && <DropdownMenuItem asChild onClick={handleEditClick}>
+                    <button className='flex gap-2 items-center w-full'>
                         <span className='text-blue-500'><FaEdit /></span>
                         Edit
                     </button>
