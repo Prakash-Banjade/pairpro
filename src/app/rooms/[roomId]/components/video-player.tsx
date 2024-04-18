@@ -21,7 +21,6 @@ export const VideoPlayer = ({ }: Props) => {
             <PaginatedGridLayout />
             <CallControls onLeave={async () => {
                 router.push('/home')
-                await call?.leave()
                 client?.disconnectUser()
             }} />
         </>
