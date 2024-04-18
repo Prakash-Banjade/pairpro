@@ -27,6 +27,14 @@ export async function updateRoom(id: string, data: CreateRoomFormSchema) {
     const user = await getCurrentUser();
     if (!user) throw new Error('Unauthorized')
 
+    // check if room exists
+    const existingRoom = await db.query.room.findFirst({
+        where: (room, { eq }) => eq(room.id, id)
+    })
+    if (!existingRoom) throw new Error('Room not found')
+
+    if (existingRoom.creatorId !== user.id) throw new Error('Unauthorized')
+
     try {
         await db.update(room).set(data).where(eq(room.id, id));
     } catch (e) {
