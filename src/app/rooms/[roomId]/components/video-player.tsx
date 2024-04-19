@@ -2,7 +2,7 @@
 
 import { User } from '@/db/schema';
 import { ExtendedRoom } from '../../../../../types';
-import { CallControls, PaginatedGridLayout, useCall, useStreamVideoClient } from '@stream-io/video-react-sdk';
+import { CallControls, PaginatedGridLayout, useStreamVideoClient } from '@stream-io/video-react-sdk';
 import { useRouter } from 'next/navigation';
 
 type Props = {
@@ -13,7 +13,6 @@ type Props = {
 export const VideoPlayer = ({ }: Props) => {
 
     const router = useRouter();
-    const call = useCall()
     const client = useStreamVideoClient()
 
     return (
