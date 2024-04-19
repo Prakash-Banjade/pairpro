@@ -18,7 +18,7 @@ export function SignInbBtn() {
 export default function Header({ }: Props) {
 
     return (
-        <header className='w-full border-b bg-secondary sticky top-0'>
+        <header className='w-full border-b bg-secondary sticky top-0 z-[10]'>
             <div className='container flex items-center justify-between py-3'>
                 <Link href='/' className='flex gap-3 items-center'>
                     <Image
