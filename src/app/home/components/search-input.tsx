@@ -41,13 +41,13 @@ export default function SearchInput() {
         form.reset({
             query: params.get("q") || "",
         })
-    }, [params])
+    }, [params, form])
 
     useEffect(() => {
         if (form.getValues().query.length === 0) {
             router.push('/home')
         }
-    }, [formWatch, form])
+    }, [formWatch, form, router])
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         values.query.length? router.push(`?q=${values.query}`) : router.push('/home')
