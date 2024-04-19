@@ -10,7 +10,7 @@ export default function EditRoomLayout({
     children
 }: Props) {
     return (
-        <div className='container py-10'>
+        <div className='container sm:py-10 py-5 pb-32'>
             <BackBtn />
             <H1>Edit Room</H1>
             <Suspense fallback={<div>Loading...</div>}>

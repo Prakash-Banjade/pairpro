@@ -19,7 +19,7 @@ export default async function SingleRoomPage({ params }: Props) {
 
     return (
         <Suspense fallback={<div>Loading...</div>}>
-            <div className='sm:py-10 py-5 container relative'>
+            <div className='sm:py-10 py-5 pb-32 container relative'>
                 <SingleRoomWrapper room={room} currentUser={currentUser} />
             </div>
         </Suspense>

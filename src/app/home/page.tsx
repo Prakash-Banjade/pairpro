@@ -7,6 +7,7 @@ import RoomList from './components/room-list'
 import SearchInput from './components/search-input'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import RoomsLoading from './components/rooms-loading'
 
 
 type Props = {
@@ -57,7 +58,7 @@ export default async function HomePage(props: Omit<Props, 'self'>) {
                     </section>
                     <SearchInput />
                     {q > 0 && <p className='mt-5'><strong>Showing results for:</strong> {props.searchParams.q}</p>}
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<RoomsLoading />}>
                         <Rooms {...props} self={false} />
                     </Suspense>
                 </div>
