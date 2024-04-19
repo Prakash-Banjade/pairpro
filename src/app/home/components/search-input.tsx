@@ -27,6 +27,7 @@ export default function SearchInput() {
     const router = useRouter();
     const params = useSearchParams();
 
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -34,6 +35,8 @@ export default function SearchInput() {
         },
     })
 
+    const formWatch = form.watch("query")
+    
     useEffect(() => {
         form.reset({
             query: params.get("q") || "",
@@ -44,7 +47,7 @@ export default function SearchInput() {
         if (form.getValues().query.length === 0) {
             router.push('/home')
         }
-    }, [form.watch("query")])
+    }, [formWatch, form])
 
     function onSubmit(values: z.infer<typeof formSchema>) {
         values.query.length? router.push(`?q=${values.query}`) : router.push('/home')

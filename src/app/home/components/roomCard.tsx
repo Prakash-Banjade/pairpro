@@ -4,7 +4,6 @@ import { ExtendedRoom } from '../../../../types'
 import {
     Card,
     CardContent,
-    CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,

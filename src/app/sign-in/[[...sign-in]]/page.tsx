@@ -1,4 +1,3 @@
-import PublicHeader from "@/components/publc_home_page/header";
 import { SignIn } from "@clerk/nextjs";
 
 export default function SignInPage() {

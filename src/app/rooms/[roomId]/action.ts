@@ -2,7 +2,7 @@
 
 import { getCurrentUser } from "@/lib/user-data-access";
 import { StreamChat } from 'stream-chat';
-import { Room, room } from "@/db/schema";
+import { room } from "@/db/schema";
 import db from "@/db";
 import { eq } from "drizzle-orm";
 import { CreateRoomFormSchema } from "@/models/create-room.model";

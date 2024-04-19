@@ -15,7 +15,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { CircleBackslashIcon, TrashIcon } from "@radix-ui/react-icons"
-import { MdDelete, MdDeleteOutline } from "react-icons/md"
+import { MdDeleteOutline } from "react-icons/md"
 
 
 type Props = {

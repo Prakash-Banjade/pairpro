@@ -1,6 +1,6 @@
 'use client'
 
-import { ParticipantView, StreamCall, useCallStateHooks, useStreamVideoClient } from '@stream-io/video-react-sdk';
+import { ParticipantView, StreamCall, useCallStateHooks } from '@stream-io/video-react-sdk';
 
 export default function ParticipantsList() {
     const { useParticipants } = useCallStateHooks();

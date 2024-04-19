@@ -1,4 +1,3 @@
-import Header from '@/components/publc_home_page/header'
 import React from 'react'
 
 type Props = {

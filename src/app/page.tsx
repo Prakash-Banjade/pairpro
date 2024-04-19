@@ -1,4 +1,3 @@
-import Header from "@/components/publc_home_page/header";
 import { SignUpRecommendation } from "@/components/publc_home_page/sign-up-recommendation";
 import { TracingBeamWrapper } from "@/components/utils/tracing-bean";
 
