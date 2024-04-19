@@ -68,3 +68,12 @@ body {
 .str-video__paginated-grid-layout__group {
   padding: 0 !important;
 }
+
+.container {
+  @apply w-full mx-auto sm:px-8 px-5
+}
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1400px;
+  }
+}

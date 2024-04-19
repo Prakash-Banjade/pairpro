@@ -48,10 +48,10 @@ export default async function HomePage(props: Omit<Props, 'self'>) {
                     <section className='flex justify-between items-center mb-8'>
 
                         <H1 className='capitalize mb-0'>find dev rooms here</H1>
-                        <Button asChild className='flex gap-1'>
+                        <Button asChild className='flex gap-1 px-2 sm:px-4'>
                             <Link href="/create-room">
                                 <PlusIcon className='h-5 w-5' />
-                                Create room
+                                <span className='hidden sm:inline'>Create room</span>
                             </Link>
                         </Button>
                     </section>

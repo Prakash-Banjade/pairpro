@@ -7,7 +7,7 @@ type Props = {
 export default function HomeLayout({ children }: Props) {
     return (
         <div className='container'>
-            <div className='py-10'>
+            <div className='sm:py-10 py-5'>
                 {children}
             </div>
         </div>

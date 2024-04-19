@@ -7,7 +7,7 @@ type Props = {}
 
 export default function CreateRoomPage({ }: Props) {
     return (
-        <div className='container py-10'>
+        <div className='container sm:py-10 py-5'>
             <BackBtn />
             <H1>Create Room</H1>
             <CreateRoomForm />
