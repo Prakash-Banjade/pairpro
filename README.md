@@ -18,6 +18,7 @@ PairPro allows users to find partners for pair programming sessions, leveraging 
 - `Next.js`: Powers both the frontend and backend of the application.
 - `Shadcn`: Utilizes Shadcn-ui for building UI components.
 - `PostgreSQL`: Stores application data, managed by Drizzle ORM for seamless database interactions.
+- `Drizzle`: ORM tool.
 - `Neon Tech`: Utilizes a cloud database powered by Serverless PostgreSQL for scalability and reliability.
 - `getstream.io`: Provides video calling functionality for real-time communication.
 - `Clerk Auth`: Handles user authentication securely.
