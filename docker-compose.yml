@@ -7,10 +7,8 @@ services:
     container_name: pair_pro_v2
     ports:
       - 5432:5432
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=pgSQL
-      - POSTGRES_DB=pair_pro
+    env_file:
+      - .env.test.local
     volumes:
       - postgres:/data/postgres
 
