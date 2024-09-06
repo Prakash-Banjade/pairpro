@@ -24,6 +24,29 @@ PairPro allows users to find partners for pair programming sessions, leveraging 
 - `Clerk Auth`: Handles user authentication securely.
 - `Vercel`: Hosts the application for easy deployment and management.
 
+## Environment Setup
+
+```bash
+DATABASE_URL=
+
+FRONTEND_URL=
+NEXT_PUBLIC_FRONTEND_URL=
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=
+
+WEBHOOK_SECRET=
+
+NEXT_PUBLIC_STREAM_API_KEY=
+STREAM_API_KEY=
+STREAM_API_SECRET=
+```
+
 ## Motivation
 
 I created this project because of following reasons:
